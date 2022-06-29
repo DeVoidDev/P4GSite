@@ -38,4 +38,4 @@ jobs:
       - name: Copy New Files
         run: scp -F ssh_config -r ./in/* web-server@voidgroup.net:~/persona-server
       - name: Start Service
-        run: ssh -F ssh_config web-server@voidgroup.net 'chmod +x ~/persona-server/Server && sudo systemctl start persona-server'
+        run: ssh -F ssh_config web-server@voidgroup.net 'chmod +x ~/persona-server/P4GSite && sudo systemctl start persona-server'
