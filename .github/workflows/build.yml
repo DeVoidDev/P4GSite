@@ -1,0 +1,27 @@
+name: Build Repository
+on:
+  push:
+    branches-ignore:
+      - "main"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Build Project
+    steps:
+      - name: Pull Repository
+        uses: actions/checkout@v3
+        with:
+          path: repo
+      - name: Setup Dotnet
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: 6.x
+      - name: Publish Server
+        working-directory: repo/app
+        run: dotnet publish --nologo -c Release -a arm64 --os linux -o ../../out --no-self-contained
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: server
+          path: out
