@@ -2,8 +2,6 @@ name: Deploy Site
 concurrency: deploy
 on:
   push:
-    branches:
-      - "main"
 
 jobs:
   build:
