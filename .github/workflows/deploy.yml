@@ -6,9 +6,10 @@ on:
       - "main"
 jobs:
   build:
+    name: Build Site
     uses: ./.github/workflows/build.yml
   deploy:
-    name: Deploy Project
+    name: Deploy Site
     needs: build
     runs-on: ubuntu-latest
     environment:
