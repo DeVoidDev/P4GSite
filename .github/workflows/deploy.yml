@@ -27,7 +27,7 @@ jobs:
         env:
           SSH_CONFIG: |-
             Host *
-              IdentitiyFile ~/deploy_key
+              IdentityFile ~/deploy_key
               ControlPath ~/%r@%h:%p
               StrictHostKeyChecking no
         run: echo "$SSH_CONFIG" > ssh_config
