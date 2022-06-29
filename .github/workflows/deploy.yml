@@ -33,4 +33,9 @@ jobs:
         run: echo "$SSH_CONFIG" > ssh_config
       - name: Stop Running Service
         run: ssh -F ssh_config web-server@voidgroup.net 'sudo systemctl stop persona-server'
-            
+      - name: Delete Existing Files
+        run: ssh -F ssh_config web-server@voidgroup.net 'cd ~/persona-server && find . ! -name . -delete'
+      - name: Copy New Files
+        run: scp -F ssh_config -r ./in/* web-server@voidgroup.net:~/persona-server
+      - name: Start Service
+        run: ssh -F ssh_config web-server@voidgroup.net 'chmod +x ~/persona-server/Server && sudo systemctl start persona-server'
