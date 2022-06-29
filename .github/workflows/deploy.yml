@@ -1,0 +1,38 @@
+name: Deploy Site
+concurrency: deploy
+on:
+  push:
+    branches:
+      - "main"
+
+jobs:
+  build:
+    uses: ./.github/workflows/build.yml
+  deploy:
+    name: Deploy Project
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: deploy
+      url: https://persona.voidgroup.net
+    steps:
+      - name: Download Artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: server
+          path: in
+      - name: Save Ssh Key
+        env:
+          DEPLOY_KEY: ${{secrets.DEPLOY_KEY}}
+        run: echo "$DEPLOY_KEY" > ~/deploy_key && chmod 600 ~/deploy_key
+      - name: Save Ssh Config
+        env:
+          SSH_CONFIG: |-
+            Host *
+              IdentitiyFile ~/deploy_key
+              ControlPath ~/%r@%h:%p
+              StrictHostKeyChecking no
+        run: echo "$SSH_CONFIG" > ssh_config
+      - name: Stop Running Service
+        run: ssh -F ssh_config web-server@voidgroup.net 'sudo systemctl stop persona-server'
+            

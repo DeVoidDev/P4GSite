@@ -1,4 +1,4 @@
-name: Build Repository
+name: Build Site
 on:
   push:
     branches-ignore:
