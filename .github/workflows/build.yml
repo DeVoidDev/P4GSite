@@ -1,5 +1,8 @@
 name: Build Site
 on:
+  push:
+    branches-ignore:
+      - "main"
   workflow_call:
 
 jobs:
