@@ -15,7 +15,7 @@ public class SecurityHeaderMiddleware
     {
         context.Response.OnStarting(() =>
         {
-            context.Response.Headers.XFrameOptions = securityHeaderService.FrameOption.ToString();
+            context.Response.Headers.ContentSecurityPolicy = securityHeaderService.ContentSecurityPolicy.ToString();
             return Task.CompletedTask;
         });
         return _next(context);

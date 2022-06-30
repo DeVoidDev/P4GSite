@@ -5,5 +5,13 @@ namespace P4GSite.Services;
 
 public class SecurityHeaderService : ISecurityHeaderService
 {
-    public FrameOption FrameOption { get; set; } = FrameOption.Deny;
+    public ContentSecurityPolicy ContentSecurityPolicy { get; } = new();
+
+    public SecurityHeaderService()
+    {
+        {
+            var defaultDirective = ContentSecurityPolicy.GetDefaultSrcDirective();
+            defaultDirective.AddNone();
+        }
+    }
 }
