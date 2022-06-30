@@ -4,5 +4,5 @@ namespace P4GSite.Services.Interfaces;
 
 public interface ISecurityHeaderService
 {
-    FrameOption FrameOption { get; set; }
+    public ContentSecurityPolicy ContentSecurityPolicy { get; }
 }
