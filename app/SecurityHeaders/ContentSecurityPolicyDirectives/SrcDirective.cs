@@ -2,15 +2,15 @@
 
 public abstract class SrcDirective : IDirective
 {
-    private readonly List<string> _list = new();
+    protected readonly List<string> List = new();
 
     public void AddNone()
     {
-        _list.Add("'none'");
+        List.Add("'none'");
     }
 
     public override string ToString()
     {
-        return string.Join(' ', _list);
+        return string.Join(' ', List);
     }
 }
