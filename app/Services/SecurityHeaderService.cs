@@ -9,7 +9,6 @@ public class SecurityHeaderService : ISecurityHeaderService
     public ContentSecurityPolicy ContentSecurityPolicy { get; } = new();
 
     public string Nonce { get; } = Convert.ToBase64String(RandomNumberGenerator.GetBytes(16));
-
     public SecurityHeaderService()
     {
         {

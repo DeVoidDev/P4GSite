@@ -6,7 +6,6 @@ namespace P4GSite.SecurityHeaders;
 public class ContentSecurityPolicy
 {
     private readonly Dictionary<string, IDirective> _directiveMap = new();
-
     private T GetDirective<T>(string id, Func<T> func) where T : IDirective
     {
         if (!_directiveMap.ContainsKey(id))
