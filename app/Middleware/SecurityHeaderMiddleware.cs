@@ -13,11 +13,7 @@ public class SecurityHeaderMiddleware
 
     public Task Invoke(HttpContext context, ISecurityHeaderService securityHeaderService)
     {
-        context.Response.OnStarting(() =>
-        {
-            context.Response.Headers.ContentSecurityPolicy = securityHeaderService.ContentSecurityPolicy.ToString();
-            return Task.CompletedTask;
-        });
+        context.Response.OnStarting(() => Task.CompletedTask);
         return _next(context);
     }
 }
