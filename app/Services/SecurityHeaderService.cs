@@ -6,19 +6,15 @@ namespace P4GSite.Services;
 
 public class SecurityHeaderService : ISecurityHeaderService
 {
-    public ContentSecurityPolicy ContentSecurityPolicy { get; } = new();
-
-    public string Nonce { get; } = Convert.ToBase64String(RandomNumberGenerator.GetBytes(16));
-
     public SecurityHeaderService()
     {
         {
-            var defaultDirective = ContentSecurityPolicy.GetDefaultSrcDirective();
-            defaultDirective.AddNone();
-            var scriptDirective = ContentSecurityPolicy.GetScriptSrcDirective();
-            scriptDirective.AddNonce(Nonce);
-            var trustedTypesDirective = ContentSecurityPolicy.GetTrustedTypesDirective();
-            trustedTypesDirective.IncludeScripts = true;
+            var connectDirective = ContentSecurityPolicy.GetDefaultDirective();
+            connectDirective.AddNone();
         }
     }
+
+    public ContentSecurityPolicy ContentSecurityPolicy { get; } = new();
+
+    public string Nonce { get; } = Convert.ToBase64String(RandomNumberGenerator.GetBytes(16));
 }
